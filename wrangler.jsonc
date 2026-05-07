@@ -1,0 +1,46 @@
+{
+  // wr-max-session-check
+  // Enforces a hard wall-clock session limit on top of a Cloudflare Waiting Room.
+  // Deploy on the same route as your Waiting Room.
+  "name": "wr-max-session-check",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-05-01",
+
+  // ----------------------------------------------------------------
+  // Routes
+  // Replace with the hostname and path covered by your Waiting Room.
+  // The Worker must be deployed on the same route as the Waiting Room.
+  // ----------------------------------------------------------------
+  "routes": [
+    {
+      "pattern": "https://<WAITING_ROOM_HOSTNAME>/<WAITING_ROOM_PATH>",
+      "zone_name": "<ZONE_NAME>"
+    }
+  ],
+
+  // ----------------------------------------------------------------
+  // Environment variables
+  // ----------------------------------------------------------------
+  "vars": {
+    // Hard session lifetime in milliseconds.
+    // Default: 3600000 (1 hour).
+    // For testing, lower this to 120000 (2 minutes).
+    "MAX_SESSION_MS": "3600000",
+
+    // Cookie name for the Worker-managed session.
+    "SESSION_COOKIE": "app_session"
+  },
+
+  // ----------------------------------------------------------------
+  // Secrets (set via `wrangler secret put HMAC_SECRET`)
+  // HMAC_SECRET: a random 32+ byte string used to sign session cookies.
+  // Generate with: openssl rand -base64 32
+  // ----------------------------------------------------------------
+
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true
+    }
+  }
+}
