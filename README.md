@@ -1,4 +1,4 @@
-# wr-max-session-check
+# Cloudflare Waiting Room - Max Session Check
 
 > **Disclaimer:** This code is provided as a sample/template for educational and reference purposes only. It is provided "as-is" without warranty of any kind. See the [LICENSE](LICENSE) file for details. You are responsible for reviewing, testing, and adapting this code for your own use case before deploying to production.
 
